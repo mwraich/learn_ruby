@@ -9,9 +9,10 @@ def subtract (one, two)
 end
 
 def sum (array)
-  sum = 0
-  array.each{|number| sum += number }
-  sum.to_i
+  # sum = 0
+  # array.each{|number| sum += number }
+  array.inject(:+).to_i
+  # sum.to_i
 end
 
 def multiplies (one, two)
