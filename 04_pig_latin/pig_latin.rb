@@ -1,15 +1,25 @@
-# consonant = [b, c, d, f, g, h, j, k, l, m, n, p, q, r, s, t, v, x, z, w, y]
-
 def translate(english)
-    vowels = ["a", "e", "i", "o", "u", "y"]
     words = english.split
-    words.each do |letter|
-    vowels.include?(words[0])
-    words << "ay"
-    until vowels.include?(words[0])
-      words << "#{letter}"
-    end
-      words << "ay"
+    words.map! {|word| word.split("")}
+    words.map! do |word|
+      translate_word(word)
   end
-  words.join(" ")
+  old = words.join(" ")
+end
+
+def translate_word(word)
+  vowels = ["a", "e", "i", "o", "u", "y"]
+  phrase = word
+     word.each do |letter|
+       unless vowels.include?(word[0])
+       word.rotate!
+     else
+       break
+      end
+    end
+      if word[0] == "u" and word.last == "q"
+        word.rotate!
+      end
+      word << "ay"
+  word.join("")
 end
